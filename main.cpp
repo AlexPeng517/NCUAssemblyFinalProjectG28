@@ -12,13 +12,20 @@ extern "C" {
 	// external ASM procedures:
 	void DisplayTable();
 	void SetTextOutColor(unsigned color);
-	void Brightness(unsigned char* im1, int w, int h, int val);
+	void Brightness(unsigned char *im1, int w, int h, int val);
+	void Contrast(unsigned char* im1, int w, int h, int val);//max:255
 	void Blur(unsigned char* im1, int w, int h);
-	void Foo();
+	void Clear(unsigned char* im1, int w, int h, int val);
+	void Edge(unsigned char* im1, int w, int h);
+	void invert(unsigned char* im1, int w, int h);
 	// local C++ functions:
 	int askForInteger();
 	void showInt(int value, int width);
-
+	int isEmpty(unsigned char* im1, int w, int h);
+	void Grey(unsigned char* im1, unsigned char* im2, int w, int h);
+	void flip(unsigned char* im1, unsigned char* im2, int w, int h);//他其實是rotate
+	void shrink(unsigned char* im1, unsigned char* im2, int w, int h);
+	void mirror(unsigned char* im1, unsigned char* im2, int w, int h);
 }
 
 // program entry point
@@ -33,7 +40,7 @@ int main()
 	unsigned char* image1, * image2;
 
 	unsigned char* imageR, * imageG, * imageB;
-
+	unsigned char* imageGrey1, * imageGrey2, * imageGrey3, *imagetmpR, * imagetmpG, * imagetmpB;
 	char outfilename[512];
 	FILE* input, * output;
 
@@ -47,7 +54,12 @@ int main()
 	imageR = (unsigned char*)calloc(width * height, 1);
 	imageG = (unsigned char*)calloc(width * height, 1);
 	imageB = (unsigned char*)calloc(width * height, 1);
-
+	imageGrey1 = (unsigned char*)calloc(width * height, 1);
+	imageGrey2 = (unsigned char*)calloc(width * height, 1);
+	imageGrey3 = (unsigned char*)calloc(width * height, 1);
+	imagetmpR = (unsigned char*)calloc(width * height, 1);
+	imagetmpG = (unsigned char*)calloc(width * height, 1);
+	imagetmpB = (unsigned char*)calloc(width * height, 1);
 	unsigned char blue, green, red;
 	for (i = 0; i < height; i++)
 		for (j = 0; j < width; j++) {
@@ -59,40 +71,53 @@ int main()
 			imageR[i * width + j] = red;
 			imageG[i * width + j] = green;
 			imageB[i * width + j] = blue;
-
+			imageGrey1[i * width + j] = (red + blue + green) / 3;
+			imageGrey2[i * width + j] = (red + blue + green) / 3;
+			imageGrey3[i * width + j] = (red + blue + green) / 3;
+			imagetmpR[i * width + j] = 0;
+			imagetmpG[i * width + j] = 0;
+			imagetmpB[i * width + j] = 0;
 			// convert to grayscale
 			//image1[i * width + j] = (blue + green + red) / 3;
 		}
 	fclose(input);
 
-	Blur(imageR, 512, 512);
-	Blur(imageG, 512, 512);
-	Blur(imageB, 512, 512);
-	Foo();
+	//Contrast(imageR, 512, 512, 256);
+	//Contrast(imageG, 512, 512, 256);
+	//Contrast(imageB, 512, 512, 256);
+	mirror(imageR, imagetmpR,512, 512);
+	mirror(imageG, imagetmpG, 512, 512);
+	mirror(imageB, imagetmpB, 512, 512);
 
 	//Save output image
+		
+		output = fopen("out.bmp", "wb");
+		*(int*)(information + 18) = 512;
+		*(int*)(information + 22) = 512;
 
-	output = fopen("out.bmp", "wb");
-	*(int*)(information + 18) = 512;
-	*(int*)(information + 22) = 512;
-
-	fwrite(information, 1, 54, output);
-	for (int i = 0; i < 54; i++)
-	{
-		cout << information[i];
-	}
-	for (i = 0; i < height; i++) {
-		for (j = 0; j < width; j++) {
-			// notice that we need to write as B,G,R order
-			putc(imageB[i * width + j], output);
-			putc(imageG[i * width + j], output);
-			putc(imageR[i * width + j], output);
+		fwrite(information, 1, 54, output);
+		for (int i = 0; i < 54; i++)
+		{
+			cout << information[i];
 		}
-	}
-	fclose(output);
+		for (i = 0; i < height; i++) {
+			for (j = 0; j < width; j++) {
+				// notice that we need to write as B,G,R order
+				putc(imagetmpB[i * width + j], output);
+				putc(imagetmpG[i * width + j], output);
+				putc(imagetmpR[i * width + j], output);
+			}
+		}
+		fclose(output);
 	free(imageR);
 	free(imageG);
 	free(imageB);
+	free(imageGrey1);
+	free(imageGrey2);
+	free(imageGrey3);
+	free(imagetmpR);
+	free(imagetmpG);
+	free(imagetmpB);
 
 
 
