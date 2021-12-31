@@ -1,0 +1,7 @@
+D:\77's_Program\組合語言\TEST\TEST\Debug\TEST.vcxproj.AssemblyReference.cache
+D:\77's_Program\組合語言\TEST\TEST\Debug\TEST.MyForm.resources
+D:\77's_Program\組合語言\TEST\TEST\Debug\TEST.vcxproj.GenerateResource.cache
+D:\Sophomore\AssemblyLang\FinalProject\NCUAssemblyFinalProjectG28-Tyi77\NCUAssemblyFinalProjectG28-Tyi77\TEST\Debug\TEST.vcxproj.AssemblyReference.cache
+D:\Sophomore\AssemblyLang\FinalProject\NCUAssemblyFinalProjectG28-Tyi77\NCUAssemblyFinalProjectG28-Tyi77\TEST\Debug\TEST.vcxproj.SuggestedBindingRedirects.cache
+D:\Sophomore\AssemblyLang\FinalProject\NCUAssemblyFinalProjectG28-Tyi77\NCUAssemblyFinalProjectG28-Tyi77\TEST\Debug\TEST.MyForm.resources
+D:\Sophomore\AssemblyLang\FinalProject\NCUAssemblyFinalProjectG28-Tyi77\NCUAssemblyFinalProjectG28-Tyi77\TEST\Debug\TEST.vcxproj.GenerateResource.cache

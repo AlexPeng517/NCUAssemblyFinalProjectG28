@@ -1,0 +1,7 @@
+﻿  MyForm.cpp
+D:\Sophomore\AssemblyLang\FinalProject\NCUAssemblyFinalProjectG28-Tyi77\NCUAssemblyFinalProjectG28-Tyi77\TEST\MyForm.h(51,10): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Sophomore\AssemblyLang\FinalProject\NCUAssemblyFinalProjectG28-Tyi77\NCUAssemblyFinalProjectG28-Tyi77\TEST\MyForm.h(137,23): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Sophomore\AssemblyLang\FinalProject\NCUAssemblyFinalProjectG28-Tyi77\NCUAssemblyFinalProjectG28-Tyi77\TEST\MyForm.h(140,11): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Sophomore\AssemblyLang\FinalProject\NCUAssemblyFinalProjectG28-Tyi77\NCUAssemblyFinalProjectG28-Tyi77\TEST\MyForm.cpp(8,1): warning C4829: Possibly incorrect parameters to function main. Consider 'int main(Platform::Array<Platform::String^>^ argv)'
+  MyForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  TEST.vcxproj -> D:\Sophomore\AssemblyLang\FinalProject\NCUAssemblyFinalProjectG28-Tyi77\NCUAssemblyFinalProjectG28-Tyi77\Debug\TEST.exe
