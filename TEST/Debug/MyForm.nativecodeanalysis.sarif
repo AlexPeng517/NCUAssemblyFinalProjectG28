@@ -1,0 +1,611 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6001",
+          "message": {
+            "text": "使用的記憶體 'image2' 尚未初始化。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                },
+                "region": {
+                  "startLine": 469,
+                  "startColumn": 12,
+                  "endLine": 469,
+                  "endColumn": 12
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "TEST::MyForm::submitBT_Click_1",
+                  "decoratedName": "?submitBT_Click_1@MyForm@TEST@@$$FA$AAMXP$AAVObject@System@@P$AAVEventArgs@4@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 427,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 427,
+                            "startColumn": 12
+                          }
+                        },
+                        "message": {
+                          "text": "'image2' 未初始化"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 429,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 437,
+                            "startColumn": 14
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 439,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 439,
+                            "startColumn": 54
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 439,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 439,
+                            "startColumn": 19
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 439,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 440,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 446,
+                            "startColumn": 8
+                          }
+                        },
+                        "message": {
+                          "text": "略過此分支 (假設 '==(o, L\"\")' 為 false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 450,
+                            "startColumn": 25
+                          }
+                        },
+                        "message": {
+                          "text": "略過此分支 (假設 '==(o, L\"\")||==(o, L\"\")' 為 false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 455,
+                            "startColumn": 19
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 455,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 457,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 458,
+                            "startColumn": 6
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 459,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 459,
+                            "startColumn": 26
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 459,
+                            "startColumn": 35
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 459,
+                            "startColumn": 44
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 459,
+                            "startColumn": 54
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 459,
+                            "startColumn": 64
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 460,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 461,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 462,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 463,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 464,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 465,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 466,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 467,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 468,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 469,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 470,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 471,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+                          },
+                          "region": {
+                            "startLine": 469,
+                            "startColumn": 12
+                          }
+                        },
+                        "message": {
+                          "text": "'image2' 已用，但可能尚未初始化"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.30.30706.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "commandLine": "\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.30.30705\\bin\\HostX86\\x86\\c1xx.dll\" -ACf{1F7B090C-16DB-4822-966A-A93D26ED4681} -ACpmspft140.dll -Alint -D_PREFAST_ -D_AST_FE_ -Analyze -zm0x0030E1C0 -il C:\\Users\\USER\\AppData\\Local\\Temp\\_CL_d5642db2ast -typedil -f MyForm.cpp -Ze -D_MSC_EXTENSIONS -Zp8 -Gs -pc \\:/ -D_MSC_VER=1930 -D_MSC_FULL_VER=193030706 -D_MSC_BUILD=0 -D_WIN32 -D_M_IX86=600 -D_M_IX86_FP=2 -GR -D_CPPRTTI -AI C:\\Program Files (x86)\\Reference Assemblies\\Microsoft\\Framework\\.NETFramework\\v4.7.2\\ -AI C:\\Program Files (x86)\\Windows Kits\\10\\References -AI C:\\Program Files (x86)\\Reference Assemblies\\Microsoft\\Framework\\.NETFramework\\v4.7.2\\Facades\\ -Gil -D_MANAGED -D_M_CEE=001 -nologo -W 3 -diagnostics:column -Ot -DCODE_ANALYSIS -DWIN32 -D_DEBUG -D_UNICODE -DUNICODE -EHa -D_CPPUNWIND -MDd -D_DEBUG -D_MT -D_DLL -GS -D_M_FP_PRECISE -Zc:wchar_t -Zc:forScope -FoDebug\\MyForm.obj -FdDebug\\vc143.pdb -external:W 3 -FU C:\\Program Files (x86)\\Reference Assemblies\\Microsoft\\Framework\\.NETFramework\\v4.7.2\\mscorlib.dll -FU C:\\Program Files (x86)\\Reference Assemblies\\Microsoft\\Framework\\.NETFramework\\v4.7.2\\System.Data.dll -FU C:\\Program Files (x86)\\Reference Assemblies\\Microsoft\\Framework\\.NETFramework\\v4.7.2\\System.dll -FU C:\\Program Files (x86)\\Reference Assemblies\\Microsoft\\Framework\\.NETFramework\\v4.7.2\\System.Drawing.dll -FU C:\\Program Files (x86)\\Reference Assemblies\\Microsoft\\Framework\\.NETFramework\\v4.7.2\\System.Windows.Forms.dll -FU C:\\Program Files (x86)\\Reference Assemblies\\Microsoft\\Framework\\.NETFramework\\v4.7.2\\System.Xml.dll -analyze:projectdirectory D:\\77's_Program\\組合語言\\finalProject\\TEST -analyze:rulesetdirectory ;C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Team Tools\\Static Analysis Tools\\\\Rule Sets; -analyze:ruleset C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Team Tools\\Static Analysis Tools\\Rule Sets\\MixedRecommendedRules.ruleset -analyze:quiet -FC -errorreport:prompt -clr:nostdlib -clrver4.08.4420.0 -D__CLR_VER=40804420 -I C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.30.30705\\include -I C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.30.30705\\atlmfc\\include -I C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\cppwinrt -I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\Include\\um -external:I C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.30.30705\\include -I C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.30.30705\\include -external:I C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.30.30705\\atlmfc\\include -I C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.30.30705\\atlmfc\\include -external:I C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\VS\\include -I C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\VS\\include -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\ucrt -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\um -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\um -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\shared -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\shared -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\winrt -external:I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\cppwinrt -I C:\\Program Files (x86)\\Windows Kits\\10\\Include\\10.0.19041.0\\cppwinrt -external:I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\Include\\um -I C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\Include\\um",
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///d:/77's_program/組合語言/finalproject/test/debug/.netframework,version=v4.7.2.assemblyattributes.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "5e7bc5fc5b14b326e465e40f189d20a482f30bb82d1d36151b798827547342d2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///D:/77's_Program/組合語言/finalProject/TEST/MyForm.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "37c8bdc42f86d3f930ca8e2f5c171f8728f14b9268485ac6c3c7fc9e6be0be08"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/77's_program/組合語言/finalproject/test/myform.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "f81fa999139641805644be6a531f90cfae970d5248f2efa461c8ffeb8a9c49ec"
+          }
+        }
+      ]
+    }
+  ]
+}
