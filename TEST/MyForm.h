@@ -29,7 +29,7 @@ extern "C" {
 	void Edge(unsigned char* im1, int w, int h);
 	void Invert(unsigned char* im1, int w, int h);
 	void Grey(unsigned char* im1, unsigned char* im2, int w, int h);
-	void flip(unsigned char* im1, unsigned char* im2, int w, int h);//¥L¨ä¹ê¬Orotate
+	void Rotate(unsigned char* im1, unsigned char* im2, int w, int h);//¥L¨ä¹ê¬Orotate
 	void shrink(unsigned char* im1, unsigned char* im2, int w, int h);
 	//void mirror(unsigned char* im1, unsigned char* im2, int w, int h);
 	// local C++ functions:
@@ -336,7 +336,7 @@ namespace TEST {
 			this->appCB->FormattingEnabled = true;
 			this->appCB->Items->AddRange(gcnew cli::array< System::Object^  >(9) {
 				L"Brightness", L"Contrast", L"Blur", L"Clear", L"Edge",
-					L"Invert", L"Grey", L"Flip", L"Shrink"
+					L"Invert", L"Grey", L"Rotate", L"Shrink"
 			});
 			this->appCB->Location = System::Drawing::Point(276, 145);
 			this->appCB->Name = L"appCB";
@@ -424,7 +424,7 @@ private: System::Void submitBT_Click_1(System::Object^ sender, System::EventArgs
 
 
 
-	BMP image;
+	BMP image,image2;
 	
 	String^ inputFile_str = inputTB->Text;
 	/*
@@ -438,64 +438,83 @@ private: System::Void submitBT_Click_1(System::Object^ sender, System::EventArgs
 	//image = readBMP("D:\\Sophomore\\AssemblyLang\\FinalProject\\ASMFinalProject\\lena.bmp", 2);
 	inputFile = std::regex_replace(inputFile, std::regex(R"(\\)"), R"(\\)");
 	String^ o = appCB->Text; // option
+
+	
+
+
+
 	if (o == "Grey") {
-		image =  readBMP(inputFile,2);
+		image =  readBMP(inputFile,1);
+		image2 = readBMP(inputFile,2);
 	}
-	else if (o == "Flip" || o == "Shrink") {
+	else if (o == "Rotate" || o == "Shrink") {
 		image = readBMP(inputFile, 3);
+		image2 = readBMP(inputFile, 1);
 	}
 	else {
 		image = readBMP(inputFile, 1);
 	}
 	int width = image.width;
 	int height = image.height;
-	unsigned char* imageR, *imageG, *imageB;
+	unsigned char* imageR, *imageG, *imageB, *image2R, *image2G, *image2B;
 	imageR = (unsigned char*)calloc(width * height, 1);
 	imageG = (unsigned char*)calloc(width * height, 1);
 	imageB = (unsigned char*)calloc(width * height, 1);
+	image2R = (unsigned char*)calloc(width * height, 1);
+	image2G = (unsigned char*)calloc(width * height, 1);
+	image2B = (unsigned char*)calloc(width * height, 1);
 	imageR = image.imageR;
 	imageG = image.imageG;
 	imageB = image.imageB;
+	image2R = image2.imageR;
+	image2G = image2.imageG;
+	image2B = image2.imageB;
 	//Application options
 	if (o == "Brightness") {
-		Brightness(imageR, 512, 512, 128);
-		Brightness(imageG, 512, 512, 128);
-		Brightness(imageB, 512, 512, 128);
+		Brightness(imageR, width, height, 128);
+		Brightness(imageG, width, height, 128);
+		Brightness(imageB, width, height, 128);
 	}
 	else if (o == "Blur") {
-		Blur(imageR, 512, 512);
-		Blur(imageG, 512, 512);
-		Blur(imageB, 512, 512);
+		Blur(imageR, width, height);
+		Blur(imageG, width, height);
+		Blur(imageB, width, height);
 	}
 	else if (o == "Contrast") {
-		Contrast(imageR, 512, 512, 256);
-		Contrast(imageG, 512, 512, 256);
-		Contrast(imageB, 512, 512, 256);
+		Contrast(imageR, width, height, 256);
+		Contrast(imageG, width, height, 256);
+		Contrast(imageB, width, height, 256);
 	}
 	else if (o == "Clear") {
-		Clear(imageR, 512, 512, 128);
-		Clear(imageG, 512, 512, 128);
-		Clear(imageB, 512, 512, 128);
+		Clear(imageR, width, height, 128);
+		Clear(imageG, width, height, 128);
+		Clear(imageB, width, height, 128);
 
 	}
 	else if (o == "Edge") {
-		Edge(imageR, 512, 512);
-		Edge(imageG, 512, 512);
-		Edge(imageB, 512, 512);
+		Edge(imageR, width, height);
+		Edge(imageG, width, height);
+		Edge(imageB, width, height);
 	}
 	else if (o == "Invert") {
-		Invert(imageR, 512, 512);
-		Invert(imageG, 512, 512);
-		Invert(imageB, 512, 512);
+		Invert(imageR, width, height);
+		Invert(imageG, width, height);
+		Invert(imageB, width, height);
 	}
 	else if (o == "Grey") {
-
+		Grey(imageR, image2R, width, height);
+		Grey(imageG, image2G, width, height);
+		Grey(imageB, image2B, width, height);
 	}
-	else if (o == "Flip") {
-
+	else if (o == "Rotate") {
+		Rotate(image2R, imageR, width, height);
+		Rotate(image2G, imageG, width, height);
+		Rotate(image2B, imageB, width, height);
 	}
 	else if (o == "Shrink") {
-
+		shrink(image2R, imageR, width, height);
+		shrink(image2G, imageG, width, height);
+		shrink(image2B, imageB, width, height);
 	}
 
 
@@ -508,6 +527,7 @@ private: System::Void submitBT_Click_1(System::Object^ sender, System::EventArgs
 	std::string outputFile = msclr::interop::marshal_as<std::string>(outputFile_str);
 	outputFile = std::regex_replace(outputFile, std::regex(R"(\\)"), R"(\\)");
 	saveBMP(outputFile, image, inputFile);
+	
 	
 }
 

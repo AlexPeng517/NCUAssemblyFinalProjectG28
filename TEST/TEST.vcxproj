@@ -106,6 +106,9 @@
     <Link>
       <AdditionalDependencies />
     </Link>
+    <MASM>
+      <IncludePaths>c:\Irvine</IncludePaths>
+    </MASM>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

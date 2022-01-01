@@ -1,0 +1,4 @@
+﻿  Assembling libary.asm...
+  MyForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+libary.obj : error LNK2026: module unsafe for SAFESEH image.
+LINK : fatal error LNK1561: entry point must be defined

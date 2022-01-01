@@ -58,6 +58,7 @@ Blur PROC C,
 	im1: PTR BYTE,
 	w: DWORD,
 	h: DWORD,
+
 	
 	mov edx,im1		; Pointer of image.
 	mov ecx,h		; height of image for outer loop.
@@ -65,6 +66,7 @@ Blur PROC C,
 
 	outerLoop:
 		push ecx
+		xor ecx,ecx
 		mov ecx, w
 		shr ecx,2
 		innerLoop:
@@ -108,6 +110,9 @@ Blur PROC C,
 		sub ecx,1
 		add edx,w
 	Loop outerLoop
+	
+	xor eax,eax
+	
 	ret
 
 Blur ENDP
@@ -288,10 +293,11 @@ im1: PTR BYTE,
 	ret 
 	isEmpty ENDP
 Grey PROC C,
-im1: PTR BYTE,
-im2: PTR BYTE,
+	im1: PTR BYTE,
+	im2: PTR BYTE,
 	w: DWORD,
-	h: DWORD
+	h: DWORD,
+	
 	mov eax, 0
 	mov ebx, 0
 	mov ecx, 0
@@ -301,22 +307,23 @@ im2: PTR BYTE,
 	mov eax, h
 	mov ebx, w
 	mov ecx, h
-	mov esi,im1
-	mov edi,im2
+	mov edi,im1
+	mov esi,im2
 L1:
 	push ecx
 	mov ecx, w
 L2:
-	mov al,[edi]
-	mov BYTE PTR[esi],al
+	mov al,BYTE PTR[esi]
+	mov BYTE PTR[edi],al
 	inc esi
 	inc edi
 	Loop L2
+	pop ecx
 	Loop L1
 	ret 
 Grey ENDP
 
-flip PROC C,
+Rotate PROC C,
 im1: PTR BYTE,
 im2: PTR BYTE,
 	w: DWORD,
@@ -354,7 +361,7 @@ L:
 	inc edi
 	Loop Outter
 	ret
-	flip ENDP
+	Rotate ENDP
 shrink PROC C,
 im1: PTR BYTE,
 im2: PTR BYTE,
