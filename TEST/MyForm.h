@@ -29,8 +29,8 @@ extern "C" {
 	void Edge(unsigned char* im1, int w, int h);
 	void Invert(unsigned char* im1, int w, int h);
 	void Grey(unsigned char* im1, unsigned char* im2, int w, int h);
-	void Transpose(unsigned char* im1, unsigned char* im2, int w, int h);//¥L¨ä¹ê¬Orotate
-	void Rotate(unsigned char* im1, int w, int h);
+	void Transpose(unsigned char* im1, unsigned char* im2, int w, int h);
+	void rotate(unsigned char* im1, unsigned char* im2, int w, int h);
 	void shrink(unsigned char* im1, unsigned char* im2, int w, int h);
 	void ColorTemperature(unsigned char* im1, int w, int h, int val);
 	void mirrorHori(unsigned char* im1, unsigned char* im2, int w, int h);
@@ -530,7 +530,7 @@ private: System::Void submitBT_Click_1(System::Object^ sender, System::EventArgs
 		image =  readBMP(inputFile,1);
 		image2 = readBMP(inputFile,2);
 	}
-	else if (o == "Transpose" || o == "Shrink" || o == "Mirror") {
+	else if (o == "Transpose" || o == "Shrink" || o == "Mirror" || o == "Rotate") {
 		image = readBMP(inputFile, 3);
 		image2 = readBMP(inputFile, 1);
 	}
@@ -600,13 +600,31 @@ private: System::Void submitBT_Click_1(System::Object^ sender, System::EventArgs
 	else if (o == "Rotate") {
 		String^ angle = argumentCB->Text;
 		if (angle == "90") {
-
+			rotate(image2R, imageR, width, height);
+			rotate(image2G, imageG, width, height);
+			rotate(image2B, imageB, width, height);
 		}
 		else if (angle == "180") {
-
+			rotate(image2R, imageR, width, height);
+			rotate(image2G, imageG, width, height);
+			rotate(image2B, imageB, width, height);
+			*image2R = *imageR;
+			*image2G = *imageG;
+			*image2B = *imageB;
+			rotate(image2B, imageB, width, height);
+			rotate(image2R, imageR, width, height);
+			rotate(image2G, imageG, width, height);
 		}
 		else if (angle == "270") {
-
+			rotate(image2R, imageR, width, height);
+			rotate(image2G, imageG, width, height);
+			rotate(image2B, imageB, width, height);
+			rotate(imageR, image2R, width, height);
+			rotate(imageG, image2G, width, height);
+			rotate(imageB, image2B, width, height);
+			rotate(image2R, imageR, width, height);
+			rotate(image2G, imageG, width, height);
+			rotate(image2B, imageB, width, height);
 		}
 	}
 	else if (o == "Shrink") {

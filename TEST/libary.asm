@@ -552,6 +552,51 @@ ColorTemperature PROC C,
 
 ColorTemperature ENDP
 
+rotate PROC C,
+im1: PTR BYTE,
+im2: PTR BYTE,
+w: DWORD,
+h: DWORD
+	mov eax, 0
+	mov ebx, 0
+	mov ecx, 0
+	mov edx, 0
+	xor esi, esi
+	xor edi, edi
+	mov eax, h
+	mov ebx, w
+	mov esi,im1
+	mov edi,im2
+	add edi,w
+	dec edi
+	mov ecx,w
+Outter:
+	push ecx
+	mov ecx, h
+	dec ecx
+Inner:
+	mov dl,[esi]
+	mov BYTE PTR[edi], dl
+	inc esi
+	add edi,w
+	Loop Inner
+	mov dl,[esi]
+	mov BYTE PTR[edi], dl
+	pop ecx
+	inc esi
+	push ecx
+	mov ecx,h
+	dec ecx
+L:
+	sub edi, w
+	Loop L
+	dec edi
+	pop ecx
+	Loop Outter
+	
+	ret
+rotate ENDP
+
 
 
 
