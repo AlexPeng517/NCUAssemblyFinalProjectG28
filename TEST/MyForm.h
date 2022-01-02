@@ -35,6 +35,7 @@ extern "C" {
 	void ColorTemperature(unsigned char* im1, int w, int h, int val);
 	void mirrorHori(unsigned char* im1, unsigned char* im2, int w, int h);
 	void mirrorVert(unsigned char* im1, unsigned char* im2, int w, int h);
+	void shift(unsigned char* im1, unsigned char* im2, int w, int h, int a, int b);
 	// local C++ functions:
 	//int isEmpty(unsigned char* im1, int w, int h);
 	
@@ -223,6 +224,10 @@ namespace TEST {
 	private: System::Windows::Forms::Label^ nopeLB;
 	private: System::Windows::Forms::Label^ argumentLB;
 	private: System::Windows::Forms::ComboBox^ argumentCB;
+	private: System::Windows::Forms::TextBox^ argumentHoTB;
+	private: System::Windows::Forms::TextBox^ argumentVeTB;
+	private: System::Windows::Forms::Label^ argumentHoLB;
+	private: System::Windows::Forms::Label^ argumentVeLB;
 
 
 
@@ -267,6 +272,10 @@ namespace TEST {
 			this->nopeLB = (gcnew System::Windows::Forms::Label());
 			this->argumentLB = (gcnew System::Windows::Forms::Label());
 			this->argumentCB = (gcnew System::Windows::Forms::ComboBox());
+			this->argumentHoTB = (gcnew System::Windows::Forms::TextBox());
+			this->argumentVeTB = (gcnew System::Windows::Forms::TextBox());
+			this->argumentHoLB = (gcnew System::Windows::Forms::Label());
+			this->argumentVeLB = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->argumentTR))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -353,9 +362,9 @@ namespace TEST {
 			this->appCB->Font = (gcnew System::Drawing::Font(L"新細明體", 26, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(136)));
 			this->appCB->FormattingEnabled = true;
-			this->appCB->Items->AddRange(gcnew cli::array< System::Object^  >(12) {
+			this->appCB->Items->AddRange(gcnew cli::array< System::Object^  >(13) {
 				L"Exposure", L"Contrast", L"Blur", L"Clear", L"Edge",
-					L"Invert", L"Grey", L"Transpose", L"Rotate", L"Shrink", L"Color Temperature", L"Mirror"
+					L"Invert", L"Grey", L"Transpose", L"Rotate", L"Shrink", L"Color Temperature", L"Mirror", L"Shift"
 			});
 			this->appCB->Location = System::Drawing::Point(276, 145);
 			this->appCB->Name = L"appCB";
@@ -459,11 +468,61 @@ namespace TEST {
 			this->argumentCB->Text = L"Please choose";
 			this->argumentCB->Visible = false;
 			// 
+			// argumentHoTB
+			// 
+			this->argumentHoTB->Font = (gcnew System::Drawing::Font(L"新細明體", 26, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(136)));
+			this->argumentHoTB->Location = System::Drawing::Point(391, 225);
+			this->argumentHoTB->Name = L"argumentHoTB";
+			this->argumentHoTB->Size = System::Drawing::Size(126, 70);
+			this->argumentHoTB->TabIndex = 17;
+			this->argumentHoTB->Text = L"0";
+			this->argumentHoTB->Visible = false;
+			// 
+			// argumentVeTB
+			// 
+			this->argumentVeTB->Font = (gcnew System::Drawing::Font(L"新細明體", 26, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(136)));
+			this->argumentVeTB->Location = System::Drawing::Point(642, 226);
+			this->argumentVeTB->Name = L"argumentVeTB";
+			this->argumentVeTB->Size = System::Drawing::Size(126, 70);
+			this->argumentVeTB->TabIndex = 18;
+			this->argumentVeTB->Text = L"0";
+			this->argumentVeTB->Visible = false;
+			// 
+			// argumentHoLB
+			// 
+			this->argumentHoLB->AutoSize = true;
+			this->argumentHoLB->Font = (gcnew System::Drawing::Font(L"新細明體", 26, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(136)));
+			this->argumentHoLB->Location = System::Drawing::Point(274, 232);
+			this->argumentHoLB->Name = L"argumentHoLB";
+			this->argumentHoLB->Size = System::Drawing::Size(111, 52);
+			this->argumentHoLB->TabIndex = 19;
+			this->argumentHoLB->Text = L"Hori";
+			this->argumentHoLB->Visible = false;
+			// 
+			// argumentVeLB
+			// 
+			this->argumentVeLB->AutoSize = true;
+			this->argumentVeLB->Font = (gcnew System::Drawing::Font(L"新細明體", 26, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(136)));
+			this->argumentVeLB->Location = System::Drawing::Point(525, 233);
+			this->argumentVeLB->Name = L"argumentVeLB";
+			this->argumentVeLB->Size = System::Drawing::Size(109, 52);
+			this->argumentVeLB->TabIndex = 20;
+			this->argumentVeLB->Text = L"Vert";
+			this->argumentVeLB->Visible = false;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 18);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(891, 638);
+			this->Controls->Add(this->argumentVeLB);
+			this->Controls->Add(this->argumentHoLB);
+			this->Controls->Add(this->argumentVeTB);
+			this->Controls->Add(this->argumentHoTB);
 			this->Controls->Add(this->nopeLB);
 			this->Controls->Add(this->argumentTR);
 			this->Controls->Add(this->label4);
@@ -530,7 +589,7 @@ private: System::Void submitBT_Click_1(System::Object^ sender, System::EventArgs
 		image =  readBMP(inputFile,1);
 		image2 = readBMP(inputFile,2);
 	}
-	else if (o == "Transpose" || o == "Shrink" || o == "Mirror" || o == "Rotate") {
+	else if (o == "Transpose" || o == "Shrink" || o == "Mirror" || o == "Rotate" || o == "Shift") {
 		image = readBMP(inputFile, 3);
 		image2 = readBMP(inputFile, 1);
 	}
@@ -649,6 +708,14 @@ private: System::Void submitBT_Click_1(System::Object^ sender, System::EventArgs
 			mirrorVert(image2B, imageB, width, height);
 		}
 	}
+	else if (o == "Shift") {
+		int hori = System::Convert::ToInt32(argumentHoTB->Text);
+		int vert = System::Convert::ToInt32(argumentVeTB->Text);
+
+		shift(image2R, imageR, width, height, vert, hori);
+		shift(image2G, imageG, width, height, vert, hori);
+		shift(image2B, imageB, width, height, vert, hori);
+	}
 
 
 
@@ -689,25 +756,49 @@ private: System::Void saveBT_Click(System::Object^ sender, System::EventArgs^ e)
 }
 private: System::Void appCB_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 	String^ o = appCB->Text;
+	//argument display type : trackBar, Nope, ComboBox, TextBox
 	if (o == "Exposure" || o == "Contrast" || o == "Clear" || o == "Color Temperature") {
 		argumentLB->Visible = true;
 		argumentTR->Visible = true;
 		nopeLB->Visible = false;
 		argumentCB->Visible = false;
+		argumentHoLB->Visible = false;
+		argumentHoTB->Visible = false;
+		argumentVeLB->Visible = false;
+		argumentVeTB->Visible = false;
 	}
 	else if (o == "Blur" || o == "Edge" || o == "Invert" || o == "Grey" || o == "Shrink" || o == "Transpose") {
 		argumentLB->Visible = false;
 		argumentTR->Visible = false;
 		nopeLB->Visible = true;
 		argumentCB->Visible = false;
+		argumentHoLB->Visible = false;
+		argumentHoTB->Visible = false;
+		argumentVeLB->Visible = false;
+		argumentVeTB->Visible = false;
 	}
 	else if (o == "Mirror" || o == "Rotate") {
 		argumentLB->Visible = false;
 		argumentTR->Visible = false;
 		nopeLB->Visible = false;
 		argumentCB->Visible = true;
+		argumentHoLB->Visible = false;
+		argumentHoTB->Visible = false;
+		argumentVeLB->Visible = false;
+		argumentVeTB->Visible = false;
 	}
+	else if (o == "Shift") {
+		argumentLB->Visible = false;
+		argumentTR->Visible = false;
+		nopeLB->Visible = false;
+		argumentCB->Visible = false;
+		argumentHoLB->Visible = true;
+		argumentHoTB->Visible = true;
+		argumentVeLB->Visible = true;
+		argumentVeTB->Visible = true;
 
+	}
+	//TrackBar
 	if (o == "Exposure" || o == "Contrast" || o == "Clear") {
 		argumentTR->Maximum = 255;
 		argumentTR->Minimum = 0;
@@ -724,7 +815,7 @@ private: System::Void appCB_SelectedIndexChanged(System::Object^ sender, System:
 		argumentTR->SmallChange = 1;
 		argumentTR->TickFrequency = 1;
 	}
-
+	//ComboBox
 	if (o == "Mirror") {
 		argumentCB->Text = "Horizontal";
 		argumentCB->Items->Clear();
@@ -735,7 +826,7 @@ private: System::Void appCB_SelectedIndexChanged(System::Object^ sender, System:
 		argumentCB->Items->Clear();
 		argumentCB->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"90", L"180", L"270" });
 	}
-
+	//reset argumentLB
 	argumentLB->Text = "0";
 }
 private: System::Void argumentTR_Scroll(System::Object^ sender, System::EventArgs^ e) {

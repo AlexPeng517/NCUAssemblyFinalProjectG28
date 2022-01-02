@@ -597,6 +597,41 @@ L:
 	ret
 rotate ENDP
 
+shift PROC C,
+im1: PTR BYTE,
+im2: PTR BYTE,
+w: DWORD,
+h: DWORD,
+a: DWORD,
+b: DWORD
+mov eax, h
+sub eax, a
+mov ebx, w
+sub ebx, b
+mov esi,im1
+mov edi,im2
+mov ecx, a
+L:
+	add esi, w
+	Loop L
+mov ecx, eax
+L2:
+push ecx
+add edi, b
+mov ecx, ebx
+L1:
+	mov dl, [esi]
+	mov BYTE PTR [edi], dl
+	inc esi
+	inc edi
+	Loop L1
+	pop ecx
+	add esi, b
+	Loop L2
+	
+	ret
+shift ENDP
+
 
 
 
