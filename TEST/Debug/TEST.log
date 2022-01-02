@@ -1,7 +1,7 @@
 ﻿  MyForm.cpp
-D:\77's_Program\組合語言\finalProject\TEST\MyForm.h(52,10): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-D:\77's_Program\組合語言\finalProject\TEST\MyForm.h(138,23): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-D:\77's_Program\組合語言\finalProject\TEST\MyForm.h(141,11): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\77's_Program\組合語言\finalProject\TEST\MyForm.h(54,10): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\77's_Program\組合語言\finalProject\TEST\MyForm.h(140,23): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\77's_Program\組合語言\finalProject\TEST\MyForm.h(143,11): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 D:\77's_Program\組合語言\finalProject\TEST\MyForm.cpp(8,1): warning C4829: 函式 main 的參數可能不正確。請考慮 'int main(Platform::Array<Platform::String^>^ argv)'
   MyForm.obj : 發現 MSIL 模組。MSIL 的累加連結已停用。正在執行完整連結
   TEST.vcxproj -> D:\77's_Program\組合語言\finalProject\Debug\TEST.exe

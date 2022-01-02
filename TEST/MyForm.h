@@ -29,10 +29,12 @@ extern "C" {
 	void Edge(unsigned char* im1, int w, int h);
 	void Invert(unsigned char* im1, int w, int h);
 	void Grey(unsigned char* im1, unsigned char* im2, int w, int h);
-	void Rotate(unsigned char* im1, unsigned char* im2, int w, int h);//¥L¨ä¹ê¬Orotate
+	void Transpose(unsigned char* im1, unsigned char* im2, int w, int h);//¥L¨ä¹ê¬Orotate
+	void Rotate(unsigned char* im1, int w, int h);
 	void shrink(unsigned char* im1, unsigned char* im2, int w, int h);
 	void ColorTemperature(unsigned char* im1, int w, int h, int val);
-	//void mirror(unsigned char* im1, unsigned char* im2, int w, int h);
+	void mirrorHori(unsigned char* im1, unsigned char* im2, int w, int h);
+	void mirrorVert(unsigned char* im1, unsigned char* im2, int w, int h);
 	// local C++ functions:
 	//int isEmpty(unsigned char* im1, int w, int h);
 	
@@ -220,6 +222,7 @@ namespace TEST {
 
 	private: System::Windows::Forms::Label^ nopeLB;
 	private: System::Windows::Forms::Label^ argumentLB;
+	private: System::Windows::Forms::ComboBox^ argumentCB;
 
 
 
@@ -263,6 +266,7 @@ namespace TEST {
 			this->argumentTR = (gcnew System::Windows::Forms::TrackBar());
 			this->nopeLB = (gcnew System::Windows::Forms::Label());
 			this->argumentLB = (gcnew System::Windows::Forms::Label());
+			this->argumentCB = (gcnew System::Windows::Forms::ComboBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->argumentTR))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -349,9 +353,9 @@ namespace TEST {
 			this->appCB->Font = (gcnew System::Drawing::Font(L"新細明體", 26, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(136)));
 			this->appCB->FormattingEnabled = true;
-			this->appCB->Items->AddRange(gcnew cli::array< System::Object^  >(10) {
+			this->appCB->Items->AddRange(gcnew cli::array< System::Object^  >(12) {
 				L"Exposure", L"Contrast", L"Blur", L"Clear", L"Edge",
-					L"Invert", L"Grey", L"Rotate", L"Shrink", L"Color Temperature"
+					L"Invert", L"Grey", L"Transpose", L"Rotate", L"Shrink", L"Color Temperature", L"Mirror"
 			});
 			this->appCB->Location = System::Drawing::Point(276, 145);
 			this->appCB->Name = L"appCB";
@@ -442,6 +446,19 @@ namespace TEST {
 			this->argumentLB->Text = L"0";
 			this->argumentLB->Visible = false;
 			// 
+			// argumentCB
+			// 
+			this->argumentCB->Font = (gcnew System::Drawing::Font(L"新細明體", 26, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(136)));
+			this->argumentCB->FormattingEnabled = true;
+			this->argumentCB->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Horizontal", L"Vertical" });
+			this->argumentCB->Location = System::Drawing::Point(276, 228);
+			this->argumentCB->Name = L"argumentCB";
+			this->argumentCB->Size = System::Drawing::Size(492, 60);
+			this->argumentCB->TabIndex = 16;
+			this->argumentCB->Text = L"Please choose";
+			this->argumentCB->Visible = false;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 18);
@@ -462,6 +479,7 @@ namespace TEST {
 			this->Controls->Add(this->Label1);
 			this->Controls->Add(this->inputTB);
 			this->Controls->Add(this->argumentLB);
+			this->Controls->Add(this->argumentCB);
 			this->Name = L"MyForm";
 			this->Text = L"ImageProcessing";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->argumentTR))->EndInit();
@@ -512,7 +530,7 @@ private: System::Void submitBT_Click_1(System::Object^ sender, System::EventArgs
 		image =  readBMP(inputFile,1);
 		image2 = readBMP(inputFile,2);
 	}
-	else if (o == "Rotate" || o == "Shrink") {
+	else if (o == "Transpose" || o == "Shrink" || o == "Mirror") {
 		image = readBMP(inputFile, 3);
 		image2 = readBMP(inputFile, 1);
 	}
@@ -574,19 +592,44 @@ private: System::Void submitBT_Click_1(System::Object^ sender, System::EventArgs
 		Grey(imageG, image2G, width, height);
 		Grey(imageB, image2B, width, height);
 	}
+	else if (o == "Transpose") {
+		Transpose(image2R, imageR, width, height);
+		Transpose(image2G, imageG, width, height);
+		Transpose(image2B, imageB, width, height);
+	}
 	else if (o == "Rotate") {
-		Rotate(image2R, imageR, width, height);
-		Rotate(image2G, imageG, width, height);
-		Rotate(image2B, imageB, width, height);
+		String^ angle = argumentCB->Text;
+		if (angle == "90") {
+
+		}
+		else if (angle == "180") {
+
+		}
+		else if (angle == "270") {
+
+		}
 	}
 	else if (o == "Shrink") {
 		shrink(image2R, imageR, width, height);
 		shrink(image2G, imageG, width, height);
 		shrink(image2B, imageB, width, height);
 	}
-	if (o == "Color Temperature") {
+	else if (o == "Color Temperature") {
 		int val = argumentTR->Value;
 		ColorTemperature(imageB, width, height, val);
+	}
+	else if (o == "Mirror") {
+		String^ method = argumentCB->Text;
+		if (method == "Horizontal") {
+			mirrorHori(image2R, imageR, width, height);
+			mirrorHori(image2G, imageG, width, height);
+			mirrorHori(image2B, imageB, width, height);
+		}
+		else if (method == "Vertical") {
+			mirrorVert(image2R, imageR, width, height);
+			mirrorVert(image2G, imageG, width, height);
+			mirrorVert(image2B, imageB, width, height);
+		}
 	}
 
 
@@ -632,12 +675,21 @@ private: System::Void appCB_SelectedIndexChanged(System::Object^ sender, System:
 		argumentLB->Visible = true;
 		argumentTR->Visible = true;
 		nopeLB->Visible = false;
+		argumentCB->Visible = false;
 	}
-	else if (o == "Blur" || o == "Edge" || o == "Invert" || o == "Grey" || o == "Shrink" || o == "Rotate") {
+	else if (o == "Blur" || o == "Edge" || o == "Invert" || o == "Grey" || o == "Shrink" || o == "Transpose") {
 		argumentLB->Visible = false;
 		argumentTR->Visible = false;
 		nopeLB->Visible = true;
+		argumentCB->Visible = false;
 	}
+	else if (o == "Mirror" || o == "Rotate") {
+		argumentLB->Visible = false;
+		argumentTR->Visible = false;
+		nopeLB->Visible = false;
+		argumentCB->Visible = true;
+	}
+
 	if (o == "Exposure" || o == "Contrast" || o == "Clear") {
 		argumentTR->Maximum = 255;
 		argumentTR->Minimum = 0;
@@ -654,15 +706,22 @@ private: System::Void appCB_SelectedIndexChanged(System::Object^ sender, System:
 		argumentTR->SmallChange = 1;
 		argumentTR->TickFrequency = 1;
 	}
+
+	if (o == "Mirror") {
+		argumentCB->Text = "Horizontal";
+		argumentCB->Items->Clear();
+		argumentCB->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Horizontal", L"Vertical" });
+	}
+	else if (o == "Rotate") {
+		argumentCB->Text = "90";
+		argumentCB->Items->Clear();
+		argumentCB->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"90", L"180", L"270" });
+	}
+
+	argumentLB->Text = "0";
 }
 private: System::Void argumentTR_Scroll(System::Object^ sender, System::EventArgs^ e) {
-	String^ o = appCB->Text;
-	if (o == "Rotate") {
-		argumentLB->Text = System::Convert::ToString((argumentTR->Value / 90) * 90);
-	}
-	else {
-		argumentLB->Text = System::Convert::ToString(argumentTR->Value);
-	}
+	argumentLB->Text = System::Convert::ToString(argumentTR->Value);
 }
 };
 }

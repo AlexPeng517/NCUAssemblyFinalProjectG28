@@ -323,7 +323,7 @@ L2:
 	ret 
 Grey ENDP
 
-Rotate PROC C,
+Transpose PROC C,
 im1: PTR BYTE,
 im2: PTR BYTE,
 	w: DWORD,
@@ -363,7 +363,7 @@ L:
 	Loop Outter
 
 	ret
-Rotate ENDP
+Transpose ENDP
 
 shrink PROC C,
 im1: PTR BYTE,
@@ -403,7 +403,7 @@ loopShrink2 :
 		ret
 shrink ENDP
 
-mirror PROC C,
+mirrorHori PROC C,
 im1: PTR BYTE,
 im2: PTR BYTE,
 	w: DWORD,
@@ -437,7 +437,7 @@ mirror1:
 mirror2:
 	dec edi
 	mov dl,[esi]
-	mov BYTE PTR[edi], al
+	mov BYTE PTR[edi], dl
 	inc esi
 	Loop mirror2
 	pop ecx
@@ -448,13 +448,71 @@ dec edi
 add edi, ebx
 Last:
 	mov dl,[esi]
-	mov BYTE PTR[edi], al
+	mov BYTE PTR[edi], dl
 	inc esi
 	dec edi
 	Loop Last
 	ret
 
-mirror ENDP
+mirrorHori ENDP
+
+mirrorVert PROC C,
+im1: PTR BYTE,
+im2: PTR BYTE,
+w: DWORD,
+h: DWORD
+	mov eax, 0
+	mov ebx, 0
+	mov ecx, 0
+	mov edx, 0
+	xor esi, esi
+	xor edi, edi
+	mov eax, h
+	mov ebx, w
+	mov esi,im1
+	mov edi,im2
+	dec eax
+	mov ecx, eax
+L:
+	add edi, ebx
+	Loop L
+	mov ecx, ebx
+	dec edi
+First:
+	inc edi
+	mov dl, [esi]
+	mov BYTE PTR[edi], dl
+	inc esi
+	Loop First
+	dec eax
+	mov ecx,eax
+Outter:
+	push ecx
+	mov ecx, ebx
+	sub edi, w
+	sub edi,w
+Inner:
+	inc edi
+	mov dl, [esi]
+	mov BYTE PTR[edi], dl
+	inc esi
+	Loop Inner
+	pop ecx
+	Loop Outter
+	sub edi,w
+	inc edi
+	sub edi,w
+	mov ecx,ebx
+	dec esi
+Last:
+	inc esi
+	mov dl, [esi]
+	mov BYTE PTR[edi], dl
+	inc edi
+	Loop Last
+
+	ret 
+mirrorVert ENDP
 
 
 ColorTemperature PROC C,  
