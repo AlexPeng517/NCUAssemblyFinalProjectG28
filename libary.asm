@@ -9,9 +9,9 @@ INCLUDE Irvine32.inc
 
 
 
-askForInteger PROTO C
+
 loadImage PROTO C
-showInt PROTO C, value:SDWORD, outWidth:DWORD
+
 
 OUT_WIDTH = 8
 ENDING_POWER = 10
@@ -20,39 +20,7 @@ ENDING_POWER = 10
 intVal DWORD ?
 
 .code
-;---------------------------------------------
-;SetTextOutColor PROC C, 
-;	color:DWORD
-;
-; Sets the text colors and clears the console
-; window. Calls Irvine32 library functions.
-;---------------------------------------------
-;	mov	eax,color
-;	call	SetTextColor
-;	call	Clrscr
-;	ret
-;SetTextOutColor ENDP
 
-;---------------------------------------------
-;DisplayTable PROC C
-;
-; Inputs an integer n and displays a
-; multiplication table ranging from n * 2^1
-; to n * 2^10.
-;----------------------------------------------
-;	INVOKE askForInteger	; call C++ function
-;	mov	intVal,eax            	; save the integer
-;	mov	ecx,ENDING_POWER       	; loop counter
-;
-;L1:	push ecx                    	; save loop counter
-;	shl  intVal,1               	; multiply by 2
-;	INVOKE showInt,intVal,OUT_WIDTH
-;	call	Crlf
-;	pop	ecx	; restore loop counter
-;    loop	L1
-;
-;	ret
-;DisplayTable ENDP
 
 Blur PROC C,
 	im1: PTR BYTE,
@@ -67,48 +35,48 @@ Blur PROC C,
 	outerLoop:
 		push ecx
 		xor ecx,ecx
-		mov ecx, w
-		shr ecx,2
+		mov ecx, w ;set inner counter as image width
+		shr ecx,2 ;divide by 2 since kernal is 2*2
 		innerLoop:
 			xor eax,eax
 			xor ebx,ebx
-			mov bl,[edx]
-			add eax,ebx
-			mov bl,[edx + 1]
-			add eax,ebx
+			mov bl,[edx]      ;load first pixel
+			add eax,ebx       ;add to eax
+			mov bl,[edx + 1]  ;load second pixel next to first pixel
+			add eax,ebx       ;add to eax
 
-			add edx,w
+			add edx,w         ;move the pixel pointer to next line
 
-			mov bl,[edx]
+			mov bl,[edx]      ;load third pixel that beneth first pixel
 
-			sub edx,w
-			add eax,ebx
+			sub edx,w         ;recover pixel pointer 
+			add eax,ebx       ;add the third pixel value to eax
 
-			add edx,w
-			inc edx
-			mov bl,[edx]
-			dec edx
-			sub edx,w
+			add edx,w	  ;move the pixel pointer to next line
+			inc edx	          ;move the pixel pointer to next pixel
+			mov bl,[edx]      ;load the fourth pixel
+			dec edx	          ;recover the pixel pointer
+			sub edx,w         ;recover the pixel pointer
 
 
-			add eax,ebx
-			shr eax,2
+			add eax,ebx       ;add fourth pixel to eax
+			shr eax,2         ;divide eax value by 4 (mean operation)
 
-			mov [edx],al
-			mov [edx + 1],al
+			mov [edx],al      ;move mean value to the first pixel
+			mov [edx + 1],al  ;move mean value to the second pixel
 
-			add edx,w
+			add edx,w         ;move pixel pointer to next line
 
-			mov [edx],al
+			mov [edx],al      ;move mean value to the third pixel
 
-			mov [edx + 1],al
+			mov [edx + 1],al  ;move mean value to the fourth pixel
 
-			sub edx,w
-			add edx,2
+			sub edx,w         ;recover pixel pointer
+			add edx,2         ;go on to next two pixels and startover
 		Loop innerLoop
-		pop ecx
-		sub ecx,1
-		add edx,w
+		pop ecx                   ;pop out image height counter when the width is 0(processed 1 line of pixels)
+		sub ecx,1                 ;decrease 1 (go on to next line of pixels)
+		add edx,w                 ;set pixel pointer to next line
 	Loop outerLoop
 	
 	xor eax,eax
@@ -124,30 +92,29 @@ Exposure PROC C,
 		mov esi,im1		; Pointer of image.
 		mov ecx,w		; Width of image.
 		mov eax,h		; Height of image.
-		mul ecx					; size = width * height
-		mov edx,val	; Value of brightness.
+		mul ecx		        ; size = width * height
+		mov edx,val	        ; Value of added brightness.
 		
 	loopBright:
-		mov cl,[esi]
-		add ecx,edx
-		cmp ecx,255
-		jg editPos
-		cmp ecx,0
-		jl editNeg
-		mov [esi],cl
-		jmp done
-	editPos:
-
-		mov BYTE PTR[esi],255
-		jmp done
-	editNeg:
+		mov cl,[esi]            ;load  a pixel value to cl
+		add ecx,edx             ;add brightness value to loaded pixel
+		cmp ecx,255             ;if greater than 8-bit max value 255
+		jg over                 ;jump to over label
+		cmp ecx,0               ;if lower than 0 (there is no negative value allowed)
+		jl under                ;jump to under label
+		mov [esi],cl            ;write the modified pixel to the pointer
+		jmp done                ;jumo to done label
+	over:
+		mov BYTE PTR[esi],255   ;write the pixel value as max 255
+		jmp done                ;jumo to done label
+	under:
 		mov BYTE PTR[esi],0
 	done:
-		inc esi					; address of image is increased.
+		inc esi			;increase the pixel pointer 
 		xor ecx,ecx
-		dec eax					; size is increased.
-		cmp eax,0				; if size == 0 ?
-		jne loopBright
+		dec eax			;decrease counter 
+		cmp eax,0		;comapre counter value
+		jne loopBright          ;if counter not equal to 0,loop until it become 0(processed all pixels)
 		xor eax,eax
 		ret
 
