@@ -36,7 +36,7 @@ Blur PROC C,
 		push ecx
 		xor ecx,ecx
 		mov ecx, w ;set inner counter as image width
-		shr ecx,2 ;divide by 2 since kernal is 2*2
+		shr ecx,1 ;divide by 2 since kernal is 2*2
 		innerLoop:
 			xor eax,eax
 			xor ebx,ebx
